@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leaf2mqtt
+  namespace: leaf2mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leaf2mqtt
+  template:
+    metadata:
+      labels:
+        app: leaf2mqtt
+    spec:
+      containers:
+        - name: leaf2mqtt
+          image: kamikac/leaf2mqtt:no-cockpit-older-europe-debug
+          envFrom:
+            - secretRef:
+                name: leaf2mqtt-secret
